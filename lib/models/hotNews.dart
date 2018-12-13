@@ -3,7 +3,7 @@ class HotNews {
 
   final List news;
 
-  final List topNews;
+  final List<TopNews> topNews;
 
   const HotNews({this.date, this.news, this.topNews});
 }

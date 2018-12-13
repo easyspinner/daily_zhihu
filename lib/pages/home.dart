@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:daily_zhihu/widgets/topBanner.dart';
 import 'package:daily_zhihu/commons/Constant.dart';
 import 'package:daily_zhihu/models/hotNews.dart';
+import 'package:daily_zhihu/repository/HotNewsRepository.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -17,16 +18,19 @@ class HomePageState extends State<HomePage> {
   List<News> _newsData = new List();
   List<TopNews> _topNewsData = new List();
   DateTime _curDateTime;
+  HotNewsRepository hotNewsRepository;
 
 
 
 
-  Future<Null> _onRefresh(){
+  Future<Null> _onRefresh() {
     final Completer<Null> completer = new Completer<Null>();
 
     _curDateTime = new DateTime.now();
-
-
+    
+    hotNewsRepository.loadNews().then((data){
+      print("data: "+ data.data.topNews.elementAt(1).image);
+    });
     completer.complete(null);
 
     return completer.future;
@@ -35,6 +39,7 @@ class HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+    hotNewsRepository = new HotNewsRepository();
   }
 
 
