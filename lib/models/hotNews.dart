@@ -1,7 +1,8 @@
+import 'package:daily_zhihu/utils/dateUtil.dart';
 class HotNews {
   final String date;
 
-  final List news;
+  final List<News> news;
 
   final List<TopNews> topNews;
 
@@ -9,10 +10,24 @@ class HotNews {
 }
 
 class News {
+
+  static const int itemTypeNormal = 0;
+  static const int itemTypeDate = 1;
   final List images;
   final int type;
   final int id;
   final String title;
+
+  int itemType = itemTypeNormal;
+  String curDate;
+
+  setItemType(int type) {
+    this.itemType = type;
+  }
+
+  setCurDate(DateTime dt) {
+    curDate = DateUtil.formatDateWithWeek(dt);
+  }
 
   News({this.images, this.type, this.id, this.title});
 
