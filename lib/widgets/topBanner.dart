@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:daily_zhihu/models/hotNews.dart';
 import 'package:transparent_image/transparent_image.dart';
+import 'package:daily_zhihu/pages/details.dart';
 
 class TopBanner extends StatefulWidget {
   final List<TopNews> _topNews;
@@ -55,8 +56,8 @@ class TopState extends State<TopBanner> {
     _indicators.clear();
     for (int i = 0; i < 5; i++) {
       _indicators.add(new SizedBox(
-        width: 5.0,
-        height: 5.0,
+        width: 10.0,
+        height: 10.0,
         child: new Container(
           decoration: new BoxDecoration(
             shape: BoxShape.circle,
@@ -83,7 +84,7 @@ class TopState extends State<TopBanner> {
           child: new Center(
             child: new SizedBox(
               width: 80.0,
-              height: 5.0,
+              height: 15.0,
               child: new Row(
                 children: _indicators,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -116,36 +117,42 @@ class TopState extends State<TopBanner> {
         ));
   }
 
-  Widget _buildTitle(){
+  Widget _buildTitle() {
     return new Align(
-            alignment: Alignment.bottomLeft,
-            child: new Container(
-              padding: EdgeInsets.symmetric(vertical: 30.0, horizontal: 10.0),
-              child: Text(
-                widget._topNews[_currentIndex].title,
-                style: TextStyle(fontSize: 20.0, color: Colors.white),
-              ),
-            ),
-          );
+      alignment: Alignment.bottomLeft,
+      child: new Container(
+        padding: EdgeInsets.symmetric(vertical: 30.0, horizontal: 10.0),
+        child: Text(
+          widget._topNews[_currentIndex].title,
+          style: TextStyle(fontSize: 20.0, color: Colors.white),
+        ),
+      ),
+    );
   }
+
   Widget _buildItem(BuildContext context, int index) {
     TopNews topNews = widget._topNews[index];
     return new GestureDetector(
         child: new GestureDetector(
-      onTapDown: (donw) {
+      onTapDown: (down) {
         _isEndScroll = false;
       },
       onTapUp: (up) {
         _isEndScroll = true;
       },
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => DetailPage('${topNews.id}')),
+        );
+      },
 //        child: new Image.asset(
 //            'images/appbar_def_bg.jpeg',
 //            fit: BoxFit.fill),
-      child:  new FadeInImage.memoryNetwork(
+      child: new FadeInImage.memoryNetwork(
           placeholder: kTransparentImage,
           image: topNews.image,
-          fit: BoxFit.cover
-      ),
+          fit: BoxFit.cover),
     ));
   }
 

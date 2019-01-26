@@ -27,4 +27,6 @@ class Api{
 
   //查看某个主题的列表 跟tid story_id 是每次请求的最后一条 example：theme/13/before/4731018
   static const String themes_list_before = "/before/";
+
+  static const String defHeadimg = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRb0V6OlKdbsP-45kue1bb3QsVF2vV6Ncm_Nw3OzSwdTmWstfzY';
 }
